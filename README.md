@@ -89,7 +89,7 @@ Success returns profile and user:
   "id": 1,
   "first_name": "First",
   "last_name": "Last",
-  "profession": "Web Developer" 
+  "profession": "Web Developer",
   "tech_of_choice": "JavaScript",
   "years_experience": 2,
   "willing_to_manage": true,
