@@ -12,7 +12,7 @@ Also I was thinking we could use JWT (JSON Web Tokens) ([JWT description](https:
 
 __Register new user__
 
-`POST` to `/users`
+`POST` to `/reg_user`
 
 ```json
 {
