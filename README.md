@@ -63,7 +63,9 @@ Success returns user instance and JWT token:
 
 __Create new user profile__
 
-`POST` to `/users/:user_id/profiles`
+`POST` to `/users/:user_id/profile`
+
+__The `current_user.id` must match `:user_id` or it will return `Not Authorized`__
 
 Set the JWT token in the request `Header`: 
 ```
@@ -104,6 +106,8 @@ __Retrieve a user profile__
 
 `GET` to `/users/:user_id/profile`
 
+__A non-authenticated (no valid JWT) get request will return `Not Authorized`, however at this time any registered user can view any other user's profile.  May want to restrict this in the future (i.e. only view if both users are 'friends' or 'matches'.__
+
 Set the JWT token in the request `Header`: 
 ```
 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njg2MzQ1ODJ9.nlAM2ohSvddnWiuEy6ec9iLZ33TNa_4coWIr_K1ulvw"
@@ -127,7 +131,7 @@ Success returns profile and user:
 }
 ```
 
-## Passion
+## Passion (not implemented yet)
 
 __Create new user passion__
 
