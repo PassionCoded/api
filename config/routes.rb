@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :users, except: [:new, :edit, :index, :create, :show, :update, :destroy] do
+    resource :profile, except: [:new, :edit]
+  end
+
   post 'auth_user' => 'authentication#authenticate_user'
   post 'reg_user' => 'registration#register_user'
   # The priority is based upon order of creation: first created -> highest priority.
