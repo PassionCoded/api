@@ -25,7 +25,7 @@ Success returns a JWT token to be used in future requests as well as the user in
  "auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0Njg2MzcyMjJ9.7IOheOSZmG-S-_Hzl4EvMXxum-RoPv2ht8YqFiP_UTg",
   "user": {
     "id": 1,
-    "email": "new_user@example.com"
+    "email": "new_user@example.com",
     "profile": false,
     "passions": []
   }
