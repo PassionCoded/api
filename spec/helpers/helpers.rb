@@ -10,8 +10,5 @@ module Helpers
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def test_method
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-  end
 end
 
