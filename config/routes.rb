@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   resources :users, except: [:new, :edit, :index, :create, :show, :update, :destroy] do
-    resource :profile, except: [:new, :edit]
+    resource :profile, except: [:new, :edit, :index, :show]
+    resources :passions, except: [:new, :edit, :show]
   end
 
   post 'auth_user' => 'authentication#authenticate_user'

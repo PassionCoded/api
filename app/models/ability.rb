@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     can :manage, User, :user_id => user.id
     can :manage, Profile, :user_id => user.id
+    can :manage, Passion, :user_id => user.id
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
