@@ -2,7 +2,7 @@ class PassionsController < ApplicationController
   before_filter :authenticate_request!
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(current_user.id)
 
     @passions = passion_params[:passions]
 

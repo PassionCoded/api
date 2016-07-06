@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
+  get  'user_info' => 'info#user_info'
 
-  resources :users, except: [:new, :edit, :index, :create, :show, :update, :destroy] do
-    resource :profile, except: [:new, :edit, :index, :show]
-    resources :passions, except: [:new, :edit, :show]
-  end
-
+  post 'reg_user'  => 'registration#register_user'
   post 'auth_user' => 'authentication#authenticate_user'
-  post 'reg_user' => 'registration#register_user'
+  post 'profiles'  => 'profiles#create'
+  post 'passions'  => 'passions#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
