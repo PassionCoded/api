@@ -1,14 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_request!
 
-  # def show
-  #   @profile = Profile.find_by(user_id: params[:user_id])
-
-  #   @passions = Passion.where(user_id: params[:user_id])
-
-  #   render json: payload(@profile.user, @profile)
-  # end
-
   def create
     @user = User.find(params[:user_id])
 

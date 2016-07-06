@@ -24,7 +24,7 @@ class PassionsController < ApplicationController
       render json: { errors: ['Passions data must be an array'] }, status: 400
     else
       passions_array.each do |passion|
-        @passion = Passion.new(name: passion[:name])
+        @passion = Passion.new(name: passion[:name], user: current_user)
 
         if @passion.save
           saved_passions.push(@passion)
@@ -46,8 +46,6 @@ class PassionsController < ApplicationController
       })
     end
 
-    pp "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    pp formatted
     formatted
   end
 
