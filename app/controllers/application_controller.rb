@@ -9,6 +9,55 @@ class ApplicationController < ActionController::API
 
   protected
 
+  def payload(user)
+    return nil unless user and user.id
+
+    profile = Profile.find_by(user_id: user.id)
+
+    passions = Passion.where(user: user)
+
+    if profile
+      {
+        auth_token: JsonWebToken.encode({ user_id: user.id }),
+        user: { 
+          id: user.id, 
+          email: user.email,
+          profile: {
+            first_name: profile.first_name,
+            last_name: profile.last_name,
+            profession: profile.profession,
+            tech_of_choice: profile.tech_of_choice,
+            years_experience: profile.years_experience,
+            willing_to_manage: profile.willing_to_manage
+          },
+          passions: format_passions(passions)
+        }
+      }
+    else
+      {
+        auth_token: JsonWebToken.encode({ user_id: user.id }),
+        user: { 
+          id: user.id, 
+          email: user.email,
+          profile: false,
+          passions: format_passions(passions)
+        }
+      }
+    end
+  end
+
+  def format_passions(input)
+    formatted = []
+
+    input.each do |p|
+      formatted.push({
+        name: p.name
+      })
+    end
+
+    formatted
+  end
+
   def authenticate_request!
     unless user_id_in_token?
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
