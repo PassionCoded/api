@@ -78,7 +78,7 @@ Success returns JWT token to be used in future reqeusts as well as the user info
       "last_name": "User",
       "profession": "Developer",
       "tech_of_choice": "JavaScript",
-      "years_experience": "1",
+      "years_experience": 1,
       "willing_to_manage": true
     },
     "passions": [
@@ -117,7 +117,7 @@ Set the JWT token in the request `Header`:
 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njg2MzQ1ODJ9.nlAM2ohSvddnWiuEy6ec9iLZ33TNa_4coWIr_K1ulvw"
 ```
 
-Success returns the user info (similar to the return when logging in, however there is no JWT):
+Success returns the user info:
 
 ```json
 {
@@ -130,7 +130,7 @@ Success returns the user info (similar to the return when logging in, however th
       "last_name": "User",
       "profession": "Developer",
       "tech_of_choice": "JavaScript",
-      "years_experience": "1",
+      "years_experience": 1,
       "willing_to_manage": true
     },
     "passions": [
@@ -187,7 +187,7 @@ Success returns user info (`passions` will be empty array if this is a newly cre
       "last_name": "User",
       "profession": "Developer",
       "tech_of_choice": "JavaScript",
-      "years_experience": "2",
+      "years_experience": 2,
       "willing_to_manage": true
     },
     "passions": []
@@ -261,6 +261,14 @@ Success returns the user info:
       {
         "id": 2,
         "name": "Environment"
+      },
+      {
+        "id": 3,
+        "name": "Sports"
+      },
+      {
+        "id": 4,
+        "name": "Government"
       }
     ]
   }
