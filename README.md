@@ -121,6 +121,7 @@ Success returns the user info (similar to the return when logging in, however th
 
 ```json
 {
+  "auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0Njg2MzcyMjJ9.7IOheOSZmG-S-_Hzl4EvMXxum-RoPv2ht8YqFiP_UTg",
   "user": {
     "id": 1,
     "email": "new_user@example.com",
@@ -177,6 +178,7 @@ Success returns user info (`passions` will be empty array if this is a newly cre
 
 ```json
 {
+  "auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0Njg2MzcyMjJ9.7IOheOSZmG-S-_Hzl4EvMXxum-RoPv2ht8YqFiP_UTg",
   "user": {
     "id": 1,
     "email": "new_user@example.com",
@@ -239,6 +241,7 @@ Success returns the user info:
 
 ```json
 {
+  "auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0Njg2MzcyMjJ9.7IOheOSZmG-S-_Hzl4EvMXxum-RoPv2ht8YqFiP_UTg",
   "user": {
     "id": 1,
     "email": "new_user@example.com",
