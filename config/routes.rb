@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   post 'reg_user'  => 'registration#register_user'
   post 'auth_user' => 'authentication#authenticate_user'
-  post 'profiles'  => 'profiles#create'
+  post 'profile'  => 'profiles#create'
   post 'passions'  => 'passions#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
