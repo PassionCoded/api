@@ -2,7 +2,7 @@ class PassionsController < ApplicationController
   before_filter :authenticate_request!
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(current_user.id)
 
     @passions = passion_params[:passions]
 
@@ -10,7 +10,7 @@ class PassionsController < ApplicationController
       process_passions
       render json: payload(@user)
     else
-      render json: { errors: ['Passions data formatted incorrectly'] }, status: 400
+      render json: { errors: ['Passions data formatted incorrectly or is blank'] }, status: 400
     end
   end
 
@@ -27,6 +27,7 @@ class PassionsController < ApplicationController
       @passions.each do |p|
         return false unless p.keys.include? "name"
         return false unless p["name"].class == String
+        return false if p["name"] == ""
       end
     end
 
