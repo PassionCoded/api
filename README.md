@@ -1,5 +1,7 @@
 # PassionCoded | API
 
+[![Build Status](https://travis-ci.org/PassionCoded/api.svg?branch=master)](https://travis-ci.org/PassionCoded/api)
+
 This API responds with/to JSON requests and incorporates JSON Web Tokens ([JWT description](https://jwt.io/)) for authentication.
 
 ## User
