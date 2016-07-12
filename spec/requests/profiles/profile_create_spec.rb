@@ -23,8 +23,8 @@ RSpec.describe "profile api", :type => :request do
       return_hash
     end
 
-    def post_to_profile(user, token, data_hash)
-      post "/users/#{user.id}/profile", 
+    def post_to_profile(token, data_hash)
+      post "/profile", 
         { 
           profile: {
             first_name: data_hash[:first_name], 
@@ -52,106 +52,106 @@ RSpec.describe "profile api", :type => :request do
       expect(Profile.find_by(user_id: user.id)).to be_nil
     end
 
-    it "returns user and profile info with POST to /users/:user_id/profile" do
+    it "returns user and profile info with POST to /profile" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash)
+      post_to_profile(token, profile_hash)
 
       expect(response_as_json[:user][:profile]).to eq(profile_hash)
     end
 
-    it "saves profile to database with POST to /users/:user_id/profile" do
+    it "saves profile to database with POST to /profile" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash)
+      post_to_profile(token, profile_hash)
 
       profile = Profile.find_by(user_id: response_as_json[:user][:id])
 
       expect(parse_profile(profile)).to eq(response_as_json[:user][:profile])
     end
 
-    it "returns an error with invalid POST to /users/:user_id/profile - no first name" do
+    it "returns an error with invalid POST to /profile - no first name" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:first_name))
+      post_to_profile(token, profile_hash(:first_name))
 
-      expect(response_as_json[:errors][0]).to eq("First name can't be blank")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
     
-    it "returns an error with invalid POST to /users/:user_id/profile - no last name" do
+    it "returns an error with invalid POST to /profile - no last name" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:last_name))
+      post_to_profile(token, profile_hash(:last_name))
 
-      expect(response_as_json[:errors][0]).to eq("Last name can't be blank")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
 
-    it "returns an error with invalid POST to /users/:user_id/profile - no profession" do
+    it "returns an error with invalid POST to /profile - no profession" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:profession))
+      post_to_profile(token, profile_hash(:profession))
 
-      expect(response_as_json[:errors][0]).to eq("Profession can't be blank")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
 
-    it "returns an error with invalid POST to /users/:user_id/profile - no tech of choice" do
+    it "returns an error with invalid POST to /profile - no tech of choice" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:tech_of_choice))
+      post_to_profile(token, profile_hash(:tech_of_choice))
 
-      expect(response_as_json[:errors][0]).to eq("Tech of choice can't be blank")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
 
-    it "returns an error with invalid POST to /users/:user_id/profile - no years experience" do
+    it "returns an error with invalid POST to /profile - no years experience" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:years_experience))
+      post_to_profile(token, profile_hash(:years_experience))
 
-      expect(response_as_json[:errors][0]).to eq("Years experience can't be blank")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
 
-    it "returns an error with invalid POST to /users/:user_id/profile - no willing to manage" do
+    it "returns an error with invalid POST to /profile - no willing to manage" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:willing_to_manage))
+      post_to_profile(token, profile_hash(:willing_to_manage))
 
-      expect(response_as_json[:errors][0]).to eq("Willing to manage must be true or false")
+      expect(response_as_json[:errors][0]).to eq("One or more profile fields is missing or empty")
 
       confirm_profile_not_saved(user)
     end
 
-    it "returns an error with mismatched datatype POST to /users/:user_id/profile - years experience not a number" do
+    it "returns an error with mismatched datatype POST to /profile - years experience not a number" do
       user = User.first
 
       token = user_token(user)
 
-      post_to_profile(user, token, profile_hash(:years_experience, "foo"))
+      post_to_profile(token, profile_hash(:years_experience, "foo"))
 
       expect(response_as_json[:errors][0]).to eq("Years experience is not a number")
 
