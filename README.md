@@ -216,7 +216,7 @@ Any data that does not pass validation will return an object with an `errors` ke
 
 ## Passions
 
-###Create new user passion
+###Create new user passion(s)
 
 `POST` to `/passions`
 
@@ -228,15 +228,15 @@ Set the JWT token in the request `Header`:
 
 Format:
 
-**`POST` *must* be an array of objects with one key called `name` and a string for the value**
-
 ```json
-[
-  { "name": "Education" },
-  { "name": "Environment" },
-  { "name": "Sports" },
-  { "name": "Government" }
-]
+{
+  "passions": [
+    { "name": "Education" },
+    { "name": "Environment" },
+    { "name": "Sports" },
+    { "name": "Government" }
+  ]
+}
 ```
 
 Success returns the user info:
