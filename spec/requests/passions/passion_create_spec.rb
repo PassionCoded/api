@@ -36,6 +36,7 @@ RSpec.describe "passion api", :type => :request do
           {"name": "One"},
           {"name": "Two"},
           {"name": "Three"},
+        ]
       }
 
       post_to_passions(token, passions)
