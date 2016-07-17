@@ -6,24 +6,43 @@ RSpec.describe "passion api", :type => :request do
       create(:user_with_profile)
     end
 
-    def post_to_passions(token, data_array)
-      post "/passions", data_array, {'Authorization': token}
-    end
-
-    it "returns user, profile and passions info with POST to /passions" do
+    it "returns correctly formatted response with new passions info with POST to /passions" do
       user = User.first
 
       token = user_token(user)
 
-      # post_to_passions(token, [{"name": "Test One"}, {"name": "Test Two"}])
+      post_to_passions(token)
+      
+      expect(response_as_json[:user][:passions][0][:name]).to eq("TestOne")
+    end
+
+    it "saves the passions to the database after POST to /passions" do
+      user = User.first
+
+      token = user_token(user)
+
+      post_to_passions(token)
+
+      expect(Passion.where(user: user)[0].name).to eq("TestOne")
+    end
+
+    it "creates multiple passions at once with POST to /passions" do
+      user = User.first
+
+      token = user_token(user)
+
       passions = {
         "passions": [
-          {"name": "TestOne"}
-        ]
+          {"name": "One"},
+          {"name": "Two"},
+          {"name": "Three"},
       }
-      post "/passions", passions, {'Authorization': token}
 
-      expect(response_as_json[:user][:passions][0][:name]).to eq("TestOne")
+      post_to_passions(token, passions)
+
+      expect(response_as_json[:user][:passions][0][:name]).to eq("One")
+      expect(response_as_json[:user][:passions][1][:name]).to eq("Two")
+      expect(response_as_json[:user][:passions][2][:name]).to eq("Three")
     end
   end
 end
