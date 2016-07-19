@@ -4,13 +4,16 @@ class PassionsController < ApplicationController
   def create
     @user = User.find(current_user.id)
 
-    @passions = passion_params[:passions]
-
-    if verify_passions
-      process_passions
-      render json: payload(@user)
+    if params[:passions].class != Array
+      render json: { errors: ['Passions must be an array of passion objects'] }, status: 400
     else
-      render json: { errors: ['Passions data formatted incorrectly or is blank'] }, status: 400
+      @passions = passion_params[:passions]
+      if verify_passions
+        process_passions
+        render json: payload(@user)
+      else
+        render json: { errors: ['Passions data formatted incorrectly or is blank'] }, status: 400
+      end
     end
   end
 
