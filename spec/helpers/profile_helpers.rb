@@ -1,4 +1,4 @@
-module ProfileHelper
+module ProfileHelpers
   def profile_hash(title=nil, replace_data=nil)
     return_hash = {
       first_name: "Test",
