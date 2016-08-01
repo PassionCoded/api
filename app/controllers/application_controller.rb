@@ -51,6 +51,7 @@ class ApplicationController < ActionController::API
 
     input.each do |p|
       formatted.push({
+        id: p.id,
         name: p.name
       })
     end
