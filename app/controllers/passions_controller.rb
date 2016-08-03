@@ -39,7 +39,14 @@ class PassionsController < ApplicationController
 
   def process_passions
     @passions.each do |passion|
-      passion = Passion.new(name: passion[:name], user: @user)
+      passion = Passion.new(name: passion[:name].downcase, user: @user)
+      current_passions_names = []
+
+      Passion.where(user: current_user).each do |p|
+        current_passions_names.push p.name
+      end
+
+      next if current_passions_names.include? passion[:name]
 
       passion.save
     end
