@@ -13,7 +13,7 @@ RSpec.describe "passion api", :type => :request do
 
       post_to_passions(token)
       
-      expect(response_as_json[:user][:passions][0][:name]).to eq("TestOne")
+      expect(response_as_json[:user][:passions][0][:name]).to eq("testone")
     end
 
     it "saves the passions to the database after POST to /passions" do
@@ -23,7 +23,7 @@ RSpec.describe "passion api", :type => :request do
 
       post_to_passions(token)
 
-      expect(Passion.where(user: user)[0].name).to eq("TestOne")
+      expect(Passion.where(user: user)[0].name).to eq("testone")
     end
 
     it "creates multiple passions at once with POST to /passions" do
@@ -41,9 +41,9 @@ RSpec.describe "passion api", :type => :request do
 
       post_to_passions(token, passions)
 
-      expect(response_as_json[:user][:passions][0][:name]).to eq("One")
-      expect(response_as_json[:user][:passions][1][:name]).to eq("Two")
-      expect(response_as_json[:user][:passions][2][:name]).to eq("Three")
+      expect(response_as_json[:user][:passions][0][:name]).to eq("one")
+      expect(response_as_json[:user][:passions][1][:name]).to eq("two")
+      expect(response_as_json[:user][:passions][2][:name]).to eq("three")
 
       expect(Passion.where(user: user).length).to eq(3)
     end
