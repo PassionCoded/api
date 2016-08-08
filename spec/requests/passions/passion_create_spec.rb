@@ -62,7 +62,7 @@ RSpec.describe "passion api", :type => :request do
 
       post_to_passions(token, passions)
 
-      expect(response_as_json[:errors][0]).to eq("Passions data formatted incorrectly or is blank")
+      expect(response_as_json[:errors][0]).to eq("Passions data cannot be blank")
       expect(Passion.where(user: user).length).to eq(0)
     end
 
