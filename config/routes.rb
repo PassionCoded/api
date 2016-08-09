@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   get  'user_info' => 'info#user_info'
 
-  post 'reg_user'  => 'registration#register_user'
-  post 'auth_user' => 'authentication#authenticate_user'
-  post 'profile'  => 'profiles#create'
-  post 'passions'  => 'passions#create'
+  post   'reg_user'  => 'registration#register_user'
+  post   'auth_user' => 'authentication#authenticate_user'
+  post   'profile'   => 'profiles#create'
+  post   'passions'  => 'passions#create'
+  delete 'passions'  => 'passions#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

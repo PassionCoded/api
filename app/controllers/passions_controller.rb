@@ -2,7 +2,7 @@ class PassionsController < ApplicationController
   before_filter :authenticate_request!
 
   def create
-    @user   = User.find(current_user.id)
+    @user  = User.find(current_user.id)
     @error = nil
     @error_messages = {
       1 => { errors: ['Passions data formatted incorrectly'] },
@@ -20,6 +20,20 @@ class PassionsController < ApplicationController
       else
         render json: @error_messages[@error], status: 400
       end
+    end
+  end
+
+  def destroy
+    if params[:passions].class != Array
+      render json: { errors: ['Passions must be an array of passion objects'] }, status: 400
+    else
+      @passions = passion_params[:passions]
+      @passions.each do |p|
+        passion = Passion.find_by(user: current_user, name: p[:name])
+        passion.destroy unless passion.nil?
+      end
+
+      render json: payload(current_user)
     end
   end
 
