@@ -277,6 +277,58 @@ Success returns the user info:
 }
 ```
 
+###Delete user passion(s)
+
+`DELETE` to `/passions`
+
+Set the JWT token in the request `Header`: 
+
+```
+"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njg2MzQ1ODJ9.nlAM2ohSvddnWiuEy6ec9iLZ33TNa_4coWIr_K1ulvw"
+```
+
+Format:
+
+```json
+{
+  "passions": [
+    { "name": "Education" },
+    { "name": "Environment" }
+  ]
+}
+```
+
+Success returns the user info:
+
+```json
+{
+  "auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0Njg2MzcyMjJ9.7IOheOSZmG-S-_Hzl4EvMXxum-RoPv2ht8YqFiP_UTg",
+  "user": {
+    "id": 1,
+    "email": "new_user@example.com",
+    "profile": {
+      "first_name": "New",
+      "last_name": "User",
+      "profession": "Developer",
+      "tech_of_choice": "JavaScript",
+      "years_experience": "1",
+      "willing_to_manage": true
+    },
+    "passions": [
+      {
+        "id": 1,
+        "name": "Education",
+      },
+      {
+        "id": 2,
+        "name": "Environment"
+      }    
+    ]
+  }
+}
+```
+If the passion to delete is not found, the standard return payload will come back, **no error will be thrown**.
+
 __Data Requirements:__
 
 * Data must be an array of objects containing a `name` key and a string value
