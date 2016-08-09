@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   'profile'   => 'profiles#create'
   post   'passions'  => 'passions#create'
   delete 'passions'  => 'passions#destroy'
+  delete 'del_user'  => 'registration#destroy_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
