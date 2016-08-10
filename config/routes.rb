@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post   'auth_user' => 'authentication#authenticate_user'
   post   'profile'   => 'profiles#create'
   post   'passions'  => 'passions#create'
-  delete 'passions'  => 'passions#destroy'
+  delete 'passions/:id'  => 'passions#destroy'
   delete 'del_user'  => 'registration#destroy_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
