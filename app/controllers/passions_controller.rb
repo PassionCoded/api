@@ -24,17 +24,20 @@ class PassionsController < ApplicationController
   end
 
   def destroy
-    if params[:passions].class != Array
-      render json: { errors: ['Passions must be an array of passion objects'] }, status: 400
-    else
-      @passions = passion_params[:passions]
-      @passions.each do |p|
-        passion = Passion.find_by(user: current_user, name: p[:name])
-        passion.destroy unless passion.nil?
-      end
+    @passions = Passion.where(user: current_user)
+    @passion_ids = []
 
-      render json: payload(current_user)
+    @passions.each do |p|
+      @passion_ids.push p.id
     end
+
+    if @passion_ids.include? params[:id].to_i
+      @passion = Passion.find(params[:id])
+      authorize! :destroy, @passion
+      @passion.destroy
+    end
+
+    render json: payload(current_user)
   end
 
   private
