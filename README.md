@@ -149,6 +149,20 @@ Success returns the user info:
 }
 ```
 
+###Delete User
+
+`DELETE` to `/del_user`
+
+Set the JWT token in the request `Header`:
+
+```
+"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njg2MzQ1ODJ9.nlAM2ohSvddnWiuEy6ec9iLZ33TNa_4coWIr_K1ulvw"
+```
+
+***The user that resolves from the JWT is the user that will be deleted***
+
+Success returns a `204 NO CONTENT` status
+
 ## Profile
 
 ###Create new user profile
@@ -277,9 +291,11 @@ Success returns the user info:
 }
 ```
 
-###Delete user passion(s)
+###Delete user passion
 
-`DELETE` to `/passions`
+`DELETE` to `/passions/:id`
+
+Replace `:id` with the id number of the passion to be deleted.
 
 Set the JWT token in the request `Header`: 
 
@@ -287,18 +303,7 @@ Set the JWT token in the request `Header`:
 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njg2MzQ1ODJ9.nlAM2ohSvddnWiuEy6ec9iLZ33TNa_4coWIr_K1ulvw"
 ```
 
-Format:
-
-```json
-{
-  "passions": [
-    { "name": "Education" },
-    { "name": "Environment" }
-  ]
-}
-```
-
-Success returns the user info:
+Success returns the user info minus the deleted passion:
 
 ```json
 {
@@ -327,18 +332,5 @@ Success returns the user info:
   }
 }
 ```
-If the passion to delete is not found, the standard return payload will come back, **no error will be thrown**.
 
-__Data Requirements:__
-
-* Data must be an array of objects containing a `name` key and a string value
-
-Any data that does not pass validation will return an object with an `errors` key that contains an array of errors:
-
-```json
-{
-  "errors": [
-    "Passions data formatted incorrectly or is blank"
-  ]
-}
-``` 
+If the passion to delete is not found, the standard return payload will still come back unchanged, **no error will be thrown**.
