@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get  'user_info' => 'info#user_info'
-
+  put   'edit_user'  => 'registration#update_user'
   post   'reg_user'  => 'registration#register_user'
   post   'auth_user' => 'authentication#authenticate_user'
   post   'profile'   => 'profiles#create'
