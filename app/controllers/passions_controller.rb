@@ -24,8 +24,18 @@ class PassionsController < ApplicationController
   end
 
   def destroy
-    @passion = Passion.find(params[:id])
-    @passion.destroy unless @passion.nil?
+    @passions = Passion.where(user: current_user)
+    @passion_ids = []
+
+    @passions.each do |p|
+      @passion_ids.push p.id
+    end
+
+    if @passion_ids.include? params[:id].to_i
+      @passion = Passion.find(params[:id])
+      authorize! :destroy, @passion
+      @passion.destroy
+    end
 
     render json: payload(current_user)
   end
